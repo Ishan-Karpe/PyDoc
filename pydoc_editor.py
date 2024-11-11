@@ -9,9 +9,6 @@ root.title("PyDoc Editor")
 # Tkinter has two parts, writing what is supposed to be on the screen, and displaying it to the screen
 # The first part is done by creating a root window, which is the main window of the application
 
-# Set window geometry
-root.geometry(f"{window_width}x{window_height}+{x}+{y}")
-
 
 text=Text(root)
 text.grid()
