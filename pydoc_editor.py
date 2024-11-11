@@ -1,6 +1,7 @@
 # 11/11/2024
 
 from tkinter import *
+from tkinter import filedialog as tkFileDialog
 
 root = Tk()
 root.title("PyDoc Editor")
@@ -10,6 +11,19 @@ root.title("PyDoc Editor")
 
 text=Text(root)
 text.grid()
+
+def save():
+    t= text.get("1.0", "end-1c")
+    # get() is used to get the text from the text widget
+    save_location=tkFileDialog.asksaveasfilename()
+    #asksaveasfilename() function is used to save the file
+    file1=open(save_location, "w+") #write and read
+    file1.write(t)
+    file1.close()
+    
+button=Button(root, text="Save Your Document", command=save)
+button.grid()
+    #grid is used to display the button on the screen, or the second part of tkinter.
 # The Text() function is used to create a text widget, which is used to display text in multiple lines
 
 
