@@ -3,7 +3,7 @@
 from tkinter import *
 from tkinter import filedialog as tkFileDialog
 
-root = Tk()
+root = Tk() #think of root as the control center as everything is done through it
 root.title("PyDoc Editor")
 # Tk has no agruments, but the title() function is used to set the title of the window
 # Tkinter has two parts, writing what is supposed to be on the screen, and displaying it to the screen
@@ -12,6 +12,7 @@ root.title("PyDoc Editor")
 text=Text(root)
 text.grid()
 
+#saving the program
 def save():
     t= text.get("1.0", "end-1c")
     # get() is used to get the text from the text widget
@@ -26,6 +27,52 @@ button.grid()
     #grid is used to display the button on the screen, or the second part of tkinter.
 # The Text() function is used to create a text widget, which is used to display text in multiple lines
 
+#onto the fonts
+def FontHelvetica():
+    global text#global is used to make the variable text global, so that it can be used in the function
+    text.config(font="Helvetica")  
+
+#repeat the same process for some basic fonts
+def FontCourier():
+    global text
+    text.config(font="Courier")
+    
+def FontTimes():
+    global text
+    text.config(font="Times")
+    
+def FontComic():
+    global text
+    text.config(font="Comic Sans MS")
+    
+def FontArial():
+    global text
+    text.config(font="Arial")
+    
+font=Menubutton(root, text="Font")
+# menubutton is used to create a button that opens a dropdown menu
+font.grid()
+font.menu=Menu(font, tearoff=0) #tearoff is used to remove the dashed line from the dropdown menu
+font['menu']=font.menu # this is used to display the dropdown menu
+helvetica=IntVar() #IntVar() is used to create a variable that can be used to store integers
+# repeat the same process for the other fonts
+courier=IntVar()
+times=IntVar()
+comic=IntVar()
+arial=IntVar()
+
+font.menu.add_checkbutton(label='Helvetica', variable=helvetica, command=FontHelvetica)
+# this is used to add a checkbutton to the dropdown menu
+# the label is the text that is displayed on the dropdown menu
+# the Variable is used to store the value of the checkbutton
+# the command is used to run the function FontCourier when the checkbutton is clicked
+# repeat the same process for the other fonts
+font.menu.add_checkbutton(label='Courier', variable=courier, command=FontCourier)
+font.menu.add_checkbutton(label='Times', variable=times, command=FontTimes)
+font.menu.add_checkbutton(label='Comic Sans MS', variable=comic, command=FontComic)
+font.menu.add_checkbutton(label="Arial", variable=arial, command=FontArial)
+
+#it changes the font for the whole thing or whatever you decided to write
 
 #the following part always comes last
 root.mainloop()
