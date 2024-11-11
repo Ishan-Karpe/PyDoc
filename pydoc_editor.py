@@ -9,6 +9,10 @@ root.title("PyDoc Editor")
 # Tkinter has two parts, writing what is supposed to be on the screen, and displaying it to the screen
 # The first part is done by creating a root window, which is the main window of the application
 
+# Set window geometry
+root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+
+
 text=Text(root)
 text.grid()
 
@@ -49,7 +53,7 @@ def FontArial():
     global text
     text.config(font="Arial")
     
-font=Menubutton(root, text="Font")
+font=Menubutton(root, text="Fonts ↓")
 # menubutton is used to create a button that opens a dropdown menu
 font.grid()
 font.menu=Menu(font, tearoff=0) #tearoff is used to remove the dashed line from the dropdown menu
@@ -79,3 +83,21 @@ root.mainloop()
 # the mainloop() function is used to run the application
 
 
+'''
+
+in summary,
+
+the program is a simple text editor that allows the user to write text, 
+save it, and change the font of the text.
+
+The program uses the Tkinter library to create a GUI application.
+The program creates a root window using the Tk() function.
+The program creates a text widget using the Text() function to display text.
+The program creates a button using the Button() function to save
+
+The program creates a dropdown menu with menu items which are the fonts, each in their own function
+The program uses the fonts as integers to store the value of the checkbutton
+
+ add_checkbutton is part of the Tk lib and has 3 arguments
+ in this case they are uses to peice the function and labels together. 
+'''
