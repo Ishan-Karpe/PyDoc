@@ -1,0 +1,12 @@
+ 
+	dEMO PROJECT
+
+	THIS is the demo project for the text editor 
+
+	some sample fonts are used here
+
+	my prefered fonts are times and arial
+
+	I will enhance this project soon, I just need enough votes first
+
+	ty! 

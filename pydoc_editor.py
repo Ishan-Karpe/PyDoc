@@ -78,7 +78,17 @@ font.menu.add_checkbutton(label="Arial", variable=arial, command=FontArial)
 #the following part always comes last
 root.mainloop()
 # the mainloop() function is used to run the application
-
+# write a rap song about the code
+# the program is a simple text editor that allows the user to write text,
+# save it, and change the font of the text.
+# The program uses the Tkinter library to create a GUI application.
+# The program creates a root window using the Tk() function.
+# The program creates a text widget using the Text() function to display text.
+# The program creates a button using the Button() function to save the text.
+# The program creates a dropdown menu with menu items which are the fonts.
+# The program uses the fonts as integers to store the value of the checkbutton.
+# The program uses the config() function to change the font of the text.
+# The program uses the mainloop() function to run the application.
 
 '''
 
