@@ -1,83 +1,95 @@
 # 11/11/2024
 
-from tkinter import *
-from tkinter import filedialog as tkFileDialog
+from tkinter import *  
+from tkinter import filedialog as tkFileDialog  
 
-root = Tk() #think of root as the control center as everything is done through it
-root.title("PyDoc Editor")
-# Tk has no agruments, but the title() function is used to set the title of the window
-# Tkinter has two parts, writing what is supposed to be on the screen, and displaying it to the screen
-# The first part is done by creating a root window, which is the main window of the application
+root = Tk()  # think of root as the control center as everything is done through it  
+root.title("PyDoc Editor")  # Set the title of the window  
 
+text = Text(root)  
+text.grid()  
 
-text=Text(root)
-text.grid()
+# Saving the program  
+def save():  
+    t = text.get("1.0", "end-1c")  
+    save_location = tkFileDialog.asksaveasfilename()  
+    if save_location:  # Ensure user selected a location  
+        with open(save_location, "w+") as file1:  # write and read  
+            file1.write(t)  
 
-#saving the program
-def save():
-    t= text.get("1.0", "end-1c")
-    # get() is used to get the text from the text widget
-    save_location=tkFileDialog.asksaveasfilename()
-    #asksaveasfilename() function is used to save the file
-    file1=open(save_location, "w+") #write and read
-    file1.write(t)
-    file1.close()
-    
-button=Button(root, text="Save Your Document", command=save)
-button.grid()
-    #grid is used to display the button on the screen, or the second part of tkinter.
-# The Text() function is used to create a text widget, which is used to display text in multiple lines
+button = Button(root, text="Save Your Document", command=save)  
+button.grid()  
 
-#onto the fonts
-def FontHelvetica():
-    global text#global is used to make the variable text global, so that it can be used in the function
-    text.config(font="Helvetica")  
+# Global variables for font properties  
+current_font_family = "Arial"  # Start with a default font  
+current_font_size = 12  
 
-#repeat the same process for some basic fonts
-def FontCourier():
-    global text
-    text.config(font="Courier")
-    
-def FontTimes():
-    global text
-    text.config(font="Times")
-    
-def FontComic():
-    global text
-    text.config(font="Comic Sans MS")
-    
-def FontArial():
-    global text
-    text.config(font="Arial")
-    
-font=Menubutton(root, text="Fonts ↓")
-# menubutton is used to create a button that opens a dropdown menu
-font.grid()
-font.menu=Menu(font, tearoff=0) #tearoff is used to remove the dashed line from the dropdown menu
-font['menu']=font.menu # this is used to display the dropdown menu
-helvetica=IntVar() #IntVar() is used to create a variable that can be used to store integers
-# repeat the same process for the other fonts
-courier=IntVar()
-times=IntVar()
-comic=IntVar()
-arial=IntVar()
+# Toggle bold and italic styles  
+def toggle_bold():  
+    current_tags = text.tag_names("sel.first")  # Get the tags of the first character in the selection  
+    if "bold" in current_tags:  
+        text.tag_remove("bold", "sel.first", "sel.last")  
+    else:  
+        text.tag_add("bold", "sel.first", "sel.last")  
+    update_font()  # Call to update font tag configuration  
 
-font.menu.add_checkbutton(label='Helvetica', variable=helvetica, command=FontHelvetica)
-# this is used to add a checkbutton to the dropdown menu
-# the label is the text that is displayed on the dropdown menu
-# the Variable is used to store the value of the checkbutton
-# the command is used to run the function FontCourier when the checkbutton is clicked
-# repeat the same process for the other fonts
-font.menu.add_checkbutton(label='Courier', variable=courier, command=FontCourier)
-font.menu.add_checkbutton(label='Times', variable=times, command=FontTimes)
-font.menu.add_checkbutton(label='Comic Sans MS', variable=comic, command=FontComic)
-font.menu.add_checkbutton(label="Arial", variable=arial, command=FontArial)
+def toggle_italic():  
+    current_tags = text.tag_names("sel.first")  
+    if "italic" in current_tags:  
+        text.tag_remove("italic", "sel.first", "sel.last")  
+    else:  
+        text.tag_add("italic", "sel.first", "sel.last")  
+    update_font()  # Call to update font tag configuration  
 
-#it changes the font for the whole thing or whatever you decided to write
+# Function to update font settings  
+def update_font():  
+    # Configure tags for bold and italic with the current selected font family and size  
+    text.tag_configure("bold", font=(current_font_family, current_font_size, "bold"))  
+    text.tag_configure("italic", font=(current_font_family, current_font_size, "italic"))  
 
-#the following part always comes last
-root.mainloop()
-# the mainloop() function is used to run the application
+# Initial tag configuration  
+update_font()  # Set initial font styles  
+
+bold_button = Button(root, text="Bold", command=toggle_bold)  
+bold_button.grid()  
+italic_button = Button(root, text="Italic", command=toggle_italic)  
+italic_button.grid()  
+
+def set_font(new_font):  
+    global current_font_family  
+    current_font_family = new_font  
+    update_font()  # Update font tags whenever font is changed  
+
+# Update your font configuration commands  
+def FontHelvetica():  
+    set_font("Helvetica")  
+
+def FontCourier():  
+    set_font("Courier")  
+
+def FontTimes():  
+    set_font("Times")  
+
+def FontComic():  
+    set_font("Comic Sans MS")  
+
+def FontArial():  
+    set_font("Arial")  
+
+font = Menubutton(root, text="Fonts ↓")  
+font.grid()  
+font.menu = Menu(font, tearoff=0)  
+font['menu'] = font.menu  
+
+# Add font options  
+font.menu.add_command(label='Helvetica', command=FontHelvetica)  
+font.menu.add_command(label='Courier', command=FontCourier)  
+font.menu.add_command(label='Times', command=FontTimes)  
+font.menu.add_command(label='Comic Sans MS', command=FontComic)  
+font.menu.add_command(label='Arial', command=FontArial)  
+
+# The following part always comes last  
+root.mainloop()  # the mainloop() function is used to run the application # the mainloop() function is used to run the application
 '''
 
 in summary,
