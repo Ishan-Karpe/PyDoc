@@ -6,30 +6,37 @@ from tkinter import filedialog as tkFileDialog
 root = Tk()  # think of root as the control center as everything is done through it  
 root.title("PyDoc Editor")  # Set the title of the window  
 
+# text widget where user can input and edit text
 text = Text(root)  
-text.grid()  
+text.grid()  #grid layout manager is used to create a table like structure
 
-# Saving the program  
+# s
+# Saving the program   
 def save():  
+    # from the start to end-1c, get the text
     t = text.get("1.0", "end-1c")  
+    # ask the user where to save the file
     save_location = tkFileDialog.asksaveasfilename()  
     if save_location:  # Ensure user selected a location  
         with open(save_location, "w+") as file1:  # write and read  
             file1.write(t)  
 
+# create a button to save the text
 button = Button(root, text="Save Your Document", command=save)  
 button.grid()  
 
 # Global variables for font properties  
 current_font_family = "Arial"  # Start with a default font  
-current_font_size = 12  
+current_font_size = 12  # sz=ize
 
 # Toggle bold and italic styles  
 def toggle_bold():  
+    #tags of the first character in the selection
     current_tags = text.tag_names("sel.first")  # Get the tags of the first character in the selection  
     if "bold" in current_tags:  
         text.tag_remove("bold", "sel.first", "sel.last")  
     else:  
+        # otherwise, add the "bold" tag to the selection
         text.tag_add("bold", "sel.first", "sel.last")  
     update_font()  # Call to update font tag configuration  
 
@@ -50,6 +57,7 @@ def update_font():
 # Initial tag configuration  
 update_font()  # Set initial font styles  
 
+#create buttons for bold and italic formatting
 bold_button = Button(root, text="Bold", command=toggle_bold)  
 bold_button.grid()  
 italic_button = Button(root, text="Italic", command=toggle_italic)  
@@ -101,10 +109,16 @@ The program uses the Tkinter library to create a GUI application.
 The program creates a root window using the Tk() function.
 The program creates a text widget using the Text() function to display text.
 The program creates a button using the Button() function to save
+The program has bold and italic options for each font
 
 The program creates a dropdown menu with menu items which are the fonts, each in their own function
 The program uses the fonts as integers to store the value of the checkbutton
 
  add_checkbutton is part of the Tk lib and has 3 arguments
- in this case they are uses to peice the function and labels together. 
+ in this case they are uses to peice the function and labels together.
+ 
+ stores the bold and italic values in the tags of the text widget
+    the tags are then used to configure the font of the text widget
+    the program uses the tag_configure() function to configure the font of the text widget
+    else it adds the bold or italic tag to the selection 
 '''
