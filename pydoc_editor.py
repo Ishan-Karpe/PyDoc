@@ -27,7 +27,35 @@ button.grid()
 
 # Global variables for font properties  
 current_font_family = "Arial"  # Start with a default font  
-current_font_size = 12  # sz=ize
+current_font_size = 12  # size
+
+def update_font():  
+    # Configure tags for bold and italic with the current selected font family and size  
+    text.tag_configure("bold", font=(current_font_family, current_font_size, "bold"))  
+    text.tag_configure("italic", font=(current_font_family, current_font_size, "italic"))
+    # an extra for the font size
+    text.configure(font=(current_font_family, current_font_size)) 
+
+# Initial tag configuration  
+update_font()  # Set initial font styles  
+
+# Function to change the font size
+def increase_font_size():
+    global current_font_size # it is global because it is used in the function, not defined in the function
+    current_font_size += 1 # add 1 to the current font size, which will increase the size of the window
+    # call the update_font function to update the font size
+    update_font()
+    
+def decrease_font_size():
+    global current_font_size
+    current_font_size -= 1 # makes the font size smaller, window small
+    update_font()
+    
+increase_button = Button(root, text="Increase Font Size", command=increase_font_size)
+increase_button.grid()
+
+decrease_button = Button(root, text="Decrease Font Size", command=decrease_font_size)
+decrease_button.grid()
 
 # Toggle bold and italic styles  
 def toggle_bold():  
@@ -48,15 +76,6 @@ def toggle_italic():
         text.tag_add("italic", "sel.first", "sel.last")  
     update_font()  # Call to update font tag configuration  
 
-# Function to update font settings  
-def update_font():  
-    # Configure tags for bold and italic with the current selected font family and size  
-    text.tag_configure("bold", font=(current_font_family, current_font_size, "bold"))  
-    text.tag_configure("italic", font=(current_font_family, current_font_size, "italic"))  
-
-# Initial tag configuration  
-update_font()  # Set initial font styles  
-
 #create buttons for bold and italic formatting
 bold_button = Button(root, text="Bold", command=toggle_bold)  
 bold_button.grid()  
@@ -67,8 +86,7 @@ def set_font(new_font):
     global current_font_family  
     current_font_family = new_font  
     update_font()  # Update font tags whenever font is changed  
-
-# Update your font configuration commands  
+ 
 def FontHelvetica():  
     set_font("Helvetica")  
 
@@ -121,4 +139,8 @@ The program uses the fonts as integers to store the value of the checkbutton
     the tags are then used to configure the font of the text widget
     the program uses the tag_configure() function to configure the font of the text widget
     else it adds the bold or italic tag to the selection 
+    
+    
+    the program uses the tag_names() function to get the tags of the first character in the selection
+    also adds the font size to the text widget
 '''
