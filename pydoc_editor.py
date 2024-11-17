@@ -21,7 +21,6 @@ def save():
         with open(save_location, "w+") as file1:  # write and read  
             file1.write(t)  
 
-# create a button to save the text
 button = Button(root, text="Save Your Document", command=save)  
 button.grid()  
 
@@ -50,12 +49,6 @@ def decrease_font_size():
     global current_font_size
     current_font_size -= 1 # makes the font size smaller, window small
     update_font()
-    
-increase_button = Button(root, text="Increase Font Size", command=increase_font_size)
-increase_button.grid()
-
-decrease_button = Button(root, text="Decrease Font Size", command=decrease_font_size)
-decrease_button.grid()
 
 # Toggle bold and italic styles  
 def toggle_bold():  
@@ -74,13 +67,7 @@ def toggle_italic():
         text.tag_remove("italic", "sel.first", "sel.last")  
     else:  
         text.tag_add("italic", "sel.first", "sel.last")  
-    update_font()  # Call to update font tag configuration  
-    
-#create buttons for bold and italic formatting
-bold_button = Button(root, text="Bold", command=toggle_bold)  
-bold_button.grid()  
-italic_button = Button(root, text="Italic", command=toggle_italic)  
-italic_button.grid()
+    update_font()  # Call to update font tag configuration
 
 def set_font(new_font):  
     global current_font_family  
@@ -101,9 +88,9 @@ def FontComic():
 
 def FontArial():  
     set_font("Arial")  
-
+    
 font = Menubutton(root, text="Fonts ↓")  
-font.grid()  
+font.grid()
 font.menu = Menu(font, tearoff=0)  
 font['menu'] = font.menu  
 
@@ -115,8 +102,17 @@ font.menu.add_command(label='Comic Sans MS', command=FontComic)
 font.menu.add_command(label='Arial', command=FontArial)  
 # add_command is used to add a menu item to the menu, you can see that most of it is made up into functions
 # The following part always comes last  
+
+bold_button = Button(root, text="Bold", command=toggle_bold)  
+bold_button.grid()  
+italic_button = Button(root, text="Italic", command=toggle_italic)  
+italic_button.grid()
+increase_button = Button(root, text="Increase Font Size", command=increase_font_size)
+increase_button.grid()
+decrease_button = Button(root, text="Decrease Font Size", command=decrease_font_size)
+decrease_button.grid()
+
 root.mainloop()  # the mainloop() function is used to run the application # the mainloop() function is used to run the application
-#
 '''
 
 in summary,
