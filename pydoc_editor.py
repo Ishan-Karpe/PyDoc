@@ -1,4 +1,5 @@
 # 11/11/2024
+#PyDoc Editor
 
 from tkinter import *  
 from tkinter import filedialog as tkFileDialog  
@@ -10,7 +11,6 @@ root.title("PyDoc Editor")  # Set the title of the window
 text = Text(root)  
 text.grid()  #grid layout manager is used to create a table like structure
 
-# s
 # Saving the program   
 def save():  
     # from the start to end-1c, get the text
@@ -75,12 +75,12 @@ def toggle_italic():
     else:  
         text.tag_add("italic", "sel.first", "sel.last")  
     update_font()  # Call to update font tag configuration  
-
+    
 #create buttons for bold and italic formatting
 bold_button = Button(root, text="Bold", command=toggle_bold)  
 bold_button.grid()  
 italic_button = Button(root, text="Italic", command=toggle_italic)  
-italic_button.grid()  
+italic_button.grid()
 
 def set_font(new_font):  
     global current_font_family  
@@ -113,9 +113,10 @@ font.menu.add_command(label='Courier', command=FontCourier)
 font.menu.add_command(label='Times', command=FontTimes)  
 font.menu.add_command(label='Comic Sans MS', command=FontComic)  
 font.menu.add_command(label='Arial', command=FontArial)  
-
+# add_command is used to add a menu item to the menu, you can see that most of it is made up into functions
 # The following part always comes last  
 root.mainloop()  # the mainloop() function is used to run the application # the mainloop() function is used to run the application
+#
 '''
 
 in summary,
