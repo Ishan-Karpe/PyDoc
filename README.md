@@ -1,5 +1,4 @@
 # PyDoc: Simple document editor. 
-### Will be enhanced soon
 
 If you don't know who I am, my name is Ishan. I am a teenager who is a PCAP certified programmer, who is now coding unique projects so that I can learn how to write code efficiently in Python and make it understandable to ANYONE through my comments.
 
