@@ -1,27 +1,26 @@
 # 11/11/2024
 #PyDoc Editor
+import tkinter as tk
+from tkinter import filedialog as tkFileDialog, Menu
 
-from tkinter import *  
-from tkinter import filedialog as tkFileDialog  
-
-root = Tk()  # think of root as the control center as everything is done through it  
+root = tk.Tk()  # think of root as the control center as everything is done through it  
 root.title("PyDoc Editor")  # Set the title of the window  
 
 # text widget where user can input and edit text
-text = Text(root)  
-text.grid()  #grid layout manager is used to create a table like structure
+text = tk.Text(root)  
+text.grid()  # grid layout manager is used to create a table like structure
 
 # Saving the program   
 def save():  
-    # from the start to end-1c, get the text
-    t = text.get("1.0", "end-1c")  
+    # Get the text from the start to the end, excluding the last newline character
+    t = text.get("1.0", "end-1c")
     # ask the user where to save the file
     save_location = tkFileDialog.asksaveasfilename()  
     if save_location:  # Ensure user selected a location  
         with open(save_location, "w+") as file1:  # write and read  
             file1.write(t)  
 
-button = Button(root, text="Save Your Document", command=save)  
+button = tk.Button(root, text="Save Your Document", command=save)  
 button.grid()  
 
 # Global variables for font properties  
@@ -47,17 +46,17 @@ def increase_font_size():
     
 def decrease_font_size():
     global current_font_size
-    current_font_size -= 1 # makes the font size smaller, window small
+    current_font_size -= 1 # Decrease font size
     update_font()
 
 # Toggle bold and italic styles  
 def toggle_bold():  
-    #tags of the first character in the selection
+    # tags of the first character in the selection
     current_tags = text.tag_names("sel.first")  # Get the tags of the first character in the selection  
     if "bold" in current_tags:  
         text.tag_remove("bold", "sel.first", "sel.last")  
     else:  
-        # otherwise, add the "bold" tag to the selection
+        # Add "bold" tag
         text.tag_add("bold", "sel.first", "sel.last")  
     update_font()  # Call to update font tag configuration  
 
@@ -89,7 +88,7 @@ def FontComic():
 def FontArial():  
     set_font("Arial")  
     
-font = Menubutton(root, text="Fonts ↓")  
+font = tk.Menubutton(root, text="Fonts ↓")  
 font.grid()
 font.menu = Menu(font, tearoff=0)  
 font['menu'] = font.menu  
@@ -103,16 +102,16 @@ font.menu.add_command(label='Arial', command=FontArial)
 # add_command is used to add a menu item to the menu, you can see that most of it is made up into functions
 # The following part always comes last  
 
-bold_button = Button(root, text="Bold", command=toggle_bold)  
+bold_button = tk.Button(root, text="Bold", command=toggle_bold)  
 bold_button.grid()  
-italic_button = Button(root, text="Italic", command=toggle_italic)  
+italic_button = tk.Button(root, text="Italic", command=toggle_italic)  
 italic_button.grid()
-increase_button = Button(root, text="Increase Font Size", command=increase_font_size)
+increase_button = tk.Button(root, text="Increase Font Size", command=increase_font_size)
 increase_button.grid()
-decrease_button = Button(root, text="Decrease Font Size", command=decrease_font_size)
+decrease_button = tk.Button(root, text="Decrease Font Size", command=decrease_font_size)
 decrease_button.grid()
 
-root.mainloop()  # the mainloop() function is used to run the application # the mainloop() function is used to run the application
+root.mainloop()  # the mainloop() function is used to run the application
 '''
 
 in summary,
